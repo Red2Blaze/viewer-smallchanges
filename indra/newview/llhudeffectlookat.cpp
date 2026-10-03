@@ -30,6 +30,7 @@
 
 #include "llrender.h"
 #include "llhudrender.h"
+#include "llfontregistry.h"
 
 #include "message.h"
 #include "llagent.h"
