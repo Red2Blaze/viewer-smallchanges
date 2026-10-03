@@ -181,6 +181,7 @@ set(viewer_SOURCE_FILES
     llexperiencelog.cpp
     llexternaleditor.cpp
     llface.cpp
+    llfakelookat.cpp
     llfasttimerview.cpp
     llfavoritesbar.cpp
     llfeaturemanager.cpp
@@ -231,6 +232,7 @@ set(viewer_SOURCE_FILES
     llfloaterexperiencepicker.cpp
     llfloaterexperienceprofile.cpp
     llfloaterexperiences.cpp
+    llfloaterfakelookat.cpp
     llfloaterfixedenvironment.cpp
     llfloaterfonttest.cpp
     llfloaterforgetuser.cpp
@@ -865,6 +867,7 @@ set(viewer_HEADER_FILES
     llexperiencelog.h
     llexternaleditor.h
     llface.h
+    llfakelookat.h
     llfasttimerview.h
     llfavoritesbar.h
     llfeaturemanager.h
@@ -915,6 +918,7 @@ set(viewer_HEADER_FILES
     llfloaterexperiencepicker.h
     llfloaterexperienceprofile.h
     llfloaterexperiences.h
+    llfloaterfakelookat.h
     llfloaterfixedenvironment.h
     llfloaterfonttest.h
     llfloaterforgetuser.h

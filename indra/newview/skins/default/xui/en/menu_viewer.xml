@@ -4237,6 +4237,16 @@ function="World.EnvPreset"
                  function="Advanced.ToggleShowLookAt" />
             </menu_item_check>
             <menu_item_check
+             label="Fake Look At Lab"
+             name="Fake Look At Lab">
+                <menu_item_check.on_check
+                 function="Floater.Visible"
+                 parameter="fake_look_at" />
+                <menu_item_check.on_click
+                 function="Floater.Toggle"
+                 parameter="fake_look_at" />
+            </menu_item_check>
+            <menu_item_check
              label="Show Point At"
              name="Show Point At">
                 <menu_item_check.on_check

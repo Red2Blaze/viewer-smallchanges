@@ -29,6 +29,7 @@
 #include "llhudeffectlookat.h"
 
 #include "llrender.h"
+#include "llhudrender.h"
 
 #include "message.h"
 #include "llagent.h"
@@ -241,7 +242,8 @@ static bool loadAttentions()
 LLHUDEffectLookAt::LLHUDEffectLookAt(const U8 type) :
     LLHUDEffect(type),
     mKillTime(0.f),
-    mLastSendTime(0.f)
+    mLastSendTime(0.f),
+    mBypassDistanceLimit(false)
 {
     clearLookAtTarget();
     // parse the default sets
@@ -427,7 +429,7 @@ bool LLHUDEffectLookAt::setLookAt(ELookAtType target_type, LLViewerObject *objec
 
     static LLCachedControl<bool> limit_lookat_hints(gSavedSettings, "LimitLookAtTarget", true);
     // Don't affect the look at if object is gAgentAvatarp (cursor head follow)
-    if (limit_lookat_hints && object != gAgentAvatarp)
+    if (limit_lookat_hints && !mBypassDistanceLimit && object != gAgentAvatarp)
     {
         // If it is a object
         if (object)
@@ -538,6 +540,33 @@ void LLHUDEffectLookAt::render()
         //LLGLDisable gls_stencil(GL_STENCIL_TEST);
 
         LLVector3 target = mTargetPos + ((LLVOAvatar*)(LLViewerObject*)mSourceObject)->mHeadp->getWorldPosition();
+
+        if (!mDebugLabelOverride.empty())
+        {
+            const LLColor3 look_at_color = (*mAttentions)[mTargetType].mColor;
+            const LLColor4 label_color(
+                look_at_color.mV[VRED],
+                look_at_color.mV[VGREEN],
+                look_at_color.mV[VBLUE],
+                1.f);
+            const LLFontGL* fontp = LLFontGL::getFont(
+                LLFontDescriptor("SansSerif", "Small", LLFontGL::NORMAL));
+            const LLVector3 label_position = target + LLVector3(0.f, 0.f, 0.3f);
+
+            gGL.pushMatrix();
+            hud_render_utf8text(
+                mDebugLabelOverride,
+                label_position,
+                *fontp,
+                LLFontGL::NORMAL,
+                LLFontGL::DROP_SHADOW,
+                -0.5f * fontp->getWidthF32(mDebugLabelOverride),
+                3.0f,
+                label_color,
+                false);
+            gGL.popMatrix();
+        }
+
         gGL.matrixMode(LLRender::MM_MODELVIEW);
         gGL.pushMatrix();
         gGL.translatef(target.mV[VX], target.mV[VY], target.mV[VZ]);

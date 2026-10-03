@@ -74,6 +74,7 @@
 #include "llfloaterexperiences.h"
 #include "llfloaterexperiencepicker.h"
 #include "llfloaterevent.h"
+#include "llfloaterfakelookat.h"
 #include "llfloaterfixedenvironment.h"
 #include "llfloaterfonttest.h"
 #include "llfloaterforgetuser.h"
@@ -378,6 +379,8 @@ void LLViewerFloaterReg::registerFloaters()
     LLFloaterReg::add("experiences", "floater_experiences.xml", (LLFloaterBuildFunc)&LLFloaterReg::build<LLFloaterExperiences>);
     LLFloaterReg::add("experience_profile", "floater_experienceprofile.xml", (LLFloaterBuildFunc)&LLFloaterReg::build<LLFloaterExperienceProfile>);
     LLFloaterReg::add("experience_search", "floater_experience_search.xml", (LLFloaterBuildFunc)&LLFloaterReg::build<LLFloaterExperiencePicker>);
+
+    LLFloaterReg::add("fake_look_at", "floater_fake_look_at.xml", (LLFloaterBuildFunc)&LLFloaterReg::build<LLFloaterFakeLookAt>);
 
     LLFloaterReg::add("font_test", "floater_font_test.xml", (LLFloaterBuildFunc)&LLFloaterReg::build<LLFloaterFontTest>);
     LLFloaterReg::add("forget_username", "floater_forget_user.xml", (LLFloaterBuildFunc)&LLFloaterReg::build<LLFloaterForgetUser>);

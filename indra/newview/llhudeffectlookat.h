@@ -29,6 +29,8 @@
 
 #include "llhudeffect.h"
 
+#include <string>
+
 class LLViewerObject;
 class LLVOAvatar;
 class LLAttentionSet;
@@ -60,6 +62,13 @@ public:
     bool setLookAt(ELookAtType target_type, LLViewerObject *object, LLVector3 position);
     void clearLookAtTarget();
 
+    // Experimental effects can opt out of the normal viewer LookAt distance
+    // clamp without changing the behavior of ordinary camera LookAt effects.
+    void setBypassDistanceLimit(bool bypass) { mBypassDistanceLimit = bypass; }
+
+    // Optional local-only label rendered above the debug LookAt crosshair.
+    void setDebugLabelOverride(const std::string& label) { mDebugLabelOverride = label; }
+
     ELookAtType getLookAtType() { return mTargetType; }
     const LLVector3& getTargetPos() { return mTargetPos; }
     const LLVector3d& getTargetOffset() { return mTargetOffsetGlobal; }
@@ -90,6 +99,8 @@ private:
     LLVector3                   mTargetPos;
     F32                         mLastSendTime;
     LLAttentionSet*             mAttentions;
+    bool                        mBypassDistanceLimit;
+    std::string                 mDebugLabelOverride;
 };
 
 #endif // LL_LLHUDEFFECTLOOKAT_H
